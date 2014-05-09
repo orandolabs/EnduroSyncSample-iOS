@@ -11,13 +11,13 @@ static NSString* kLinkClassName = @"link";
 static NSString* kPrefsClassName = @"user";
 static NSString* kNamespace = @"http://www.example.com/";
 
-static NSString* kApp = @"testapp";//@"YOUR APP NAME";
-static NSString* kPassword = @"asdf";//@"YOUR PASSWORD";
-static NSString* kPassphrase = @"testapp";//@"YOUR APP PASSPHRASE";
+static NSString* kApp = @"YOUR APP NAME";
+static NSString* kPassword = @"YOUR PASSWORD";
+static NSString* kPassphrase = @"YOUR APP PASSPHRASE";
 static NSString* kDeviceId = @"dummydeviceid";//@"A DEVICE ID, CAN BE ANYTHING FOR NOW";
-static NSString* kObjectStoreName = @"teststore";//@"YOUR OBJECT STORE NAME";
-static NSString* kUsername = @"bill@orandolabs.com";//@"YOUR USER EMAIL ADDRESS";
-static NSString* kAccount = @"5f2501f1-d877-46a7-ae2b-8ec1a741d090_75732d776573742d32_0_0";//@"YOUR ACCOUNT NUMBER;
+static NSString* kObjectStoreName = @"YOUR OBJECT STORE NAME";
+static NSString* kUsername = @"YOUR USER EMAIL ADDRESS";
+static NSString* kAccount = @"YOUR ACCOUNT NUMBER";
 
 @implementation SyncBase
 
