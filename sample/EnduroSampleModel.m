@@ -9,14 +9,14 @@
 
 static NSString* kLinkClassName = @"link";
 static NSString* kPrefsClassName = @"user";
-static NSString* kNamespace = @"http://www.example.com/";
+static NSString* kNamespace = @"http://www.example.com/ns/";
 
 static NSString* kApp = @"YOUR APP NAME";
 static NSString* kPassword = @"YOUR PASSWORD";
-static NSString* kPassphrase = @"YOUR APP PASSPHRASE";
+static NSString* kPassphrase = @"YOUR PASSPHRASE";
 static NSString* kDeviceId = @"dummydeviceid";//@"A DEVICE ID, CAN BE ANYTHING FOR NOW";
 static NSString* kObjectStoreName = @"YOUR OBJECT STORE NAME";
-static NSString* kUsername = @"YOUR USER EMAIL ADDRESS";
+static NSString* kUsername = @"YOUR EMAIL ADDRESS";
 static NSString* kAccount = @"YOUR ACCOUNT NUMBER";
 
 @implementation SyncBase
@@ -34,7 +34,7 @@ static NSString* kAccount = @"YOUR ACCOUNT NUMBER";
 }
 
 - (void) createEnduroModel {
-    self.model = [[EnduroModel alloc] initWithNamespace:@"http://www.example.com/"];
+    self.model = [[EnduroModel alloc] initWithNamespace:kNamespace];
     self.linksClass = [self.model createClass:kLinkClassName withProperties:@[@"url",@"title"] ofType:[LinkObject class]];
     self.prefsClass = [self.model createClass:kPrefsClassName withProperties:@[@"email",@"language",@"age",@"links"] ofType:[PrefsObject class]];
 }
