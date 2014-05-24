@@ -50,17 +50,15 @@ static NSString* kAccount = @"YOUR ACCOUNT NUMBER";
     
     [self createEnduroParms];
     [self createEnduroModel];
-    [EnduroSync createWithDirectory:[self enduroDirectory] ready:^(EnduroSync *sync) {
-        self.enduro = sync;
-        EnduroSyncClient* client = [sync createClient:self.parms];
-        [client openObjectStore:self.parms.objectStoreName withModel:self.model success:^(EnduroObjectStore *store) {
-            self.store = store;
-            [self syncObjectStore:^{
-                [self storeIsOpenAndSynced];
-            }];
-        } failure:^(EnduroException *ex) {
-            NSLog(@"Exception opening object store, Error: %@", ex);
+    self.enduro = [[EnduroSync alloc] initWithParameters:self.parms andDirectory:[self enduroDirectory]];
+    EnduroSyncClient* client = [self.enduro createClient:self.parms];
+    [client openObjectStore:self.parms.objectStoreName withModel:self.model success:^(EnduroObjectStore *store) {
+        self.store = store;
+        [self syncObjectStore:^{
+            [self storeIsOpenAndSynced];
         }];
+    } failure:^(EnduroException *ex) {
+        NSLog(@"Exception opening object store, Error: %@", ex);
     }];
 }
 
@@ -73,7 +71,7 @@ static NSString* kAccount = @"YOUR ACCOUNT NUMBER";
 }
 
 - (void) storeIsOpenAndSynced {
-    [PrefsObject objectWithNameRecursive:self.parms.username andClass:self.prefsClass inStore:self.store withBlock:^(EnduroObject *o, Boolean found) {
+    [PrefsObject getOrCreateObjectWithName:self.parms.username andClass:self.prefsClass inStore:self.store withSuccess:^(EnduroObject *o, Boolean found) {
         self.prefs = (PrefsObject*) o;
         if (!found) {
             self.prefs.age = 44;
@@ -96,6 +94,8 @@ static NSString* kAccount = @"YOUR ACCOUNT NUMBER";
         } else {
             [self.syncBaseDelegate prefsAreInitialized];
         }
+    } andFailure:^(EnduroException* ex) {
+        NSLog(@"Exception getting prefs object: %@", ex);
     }];
 }
 
